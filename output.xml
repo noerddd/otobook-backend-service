@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.10.11 on win32)" generated="20250614 21:20:52.886" rpa="false" schemaversion="4">
+<suite id="s1" name="Tasks" source="D:\Belajar\robot-gambar\tasks.robot">
+<test id="s1-t1" name="Get JSON Data From API_URL" line="33">
+<kw name="Set Variable" library="BuiltIn">
+<var>${book_id}</var>
+<arg>${BOOK_ID}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250614 21:20:54.609" level="INFO">${book_id} = 16</msg>
+<status status="PASS" starttime="20250614 21:20:54.608" endtime="20250614 21:20:54.609"/>
+</kw>
+<kw name="Create Session" library="RPA.HTTP">
+<arg>mysession</arg>
+<arg>${BASE_API_URL}</arg>
+<arg>verify=${False}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250614 21:20:54.609" level="INFO">Creating Session using : alias=mysession, url=http://103.106.72.182:8770, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20250614 21:20:54.609" endtime="20250614 21:20:54.609"/>
+</kw>
+<kw name="GET On Session" library="RPA.HTTP">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/api/getBookSinopsis/${book_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250614 21:20:54.771" level="FAIL">HTTPError: 404 Client Error: NOT FOUND for url: http://103.106.72.182:8770/api/getBookSinopsis/16</msg>
+<status status="FAIL" starttime="20250614 21:20:54.610" endtime="20250614 21:20:54.845"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>response: ${response.content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.846" endtime="20250614 21:20:54.846"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Prepocess Data from API</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.846" endtime="20250614 21:20:54.846"/>
+</kw>
+<kw name="Decode Bytes To String" library="String">
+<var>${response_str}</var>
+<arg>${response.content}</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Decodes the given ``bytes`` to a Unicode string using the given ``encoding``.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.846" endtime="20250614 21:20:54.846"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>response_str: ${response_str}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.846" endtime="20250614 21:20:54.846"/>
+</kw>
+<kw name="Fix And Load Json" library="JsonHelper">
+<var>${json_data}</var>
+<arg>${response_str}</arg>
+<status status="NOT RUN" starttime="20250614 21:20:54.846" endtime="20250614 21:20:54.847"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>json_data: ${json_data}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.847" endtime="20250614 21:20:54.847"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${JUDUL}</arg>
+<arg>${json_data['judul']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.847" endtime="20250614 21:20:54.847"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${PENGARANG}</arg>
+<arg>${json_data['pengarang']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.847" endtime="20250614 21:20:54.847"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${PENERBITAN}</arg>
+<arg>${json_data['penerbitan']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.848" endtime="20250614 21:20:54.848"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${DESC}</arg>
+<arg>${json_data['deskripsi']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.848" endtime="20250614 21:20:54.848"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${ISBN}</arg>
+<arg>${json_data['isbn']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.848" endtime="20250614 21:20:54.848"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${KOTA}</arg>
+<arg>${json_data['kota']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.848" endtime="20250614 21:20:54.849"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${TAHUN}</arg>
+<arg>${json_data['tahun']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.849" endtime="20250614 21:20:54.849"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${EDITOR}</arg>
+<arg>${json_data['editor']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.849" endtime="20250614 21:20:54.849"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${ILUSTRATOR}</arg>
+<arg>${json_data['ilustrator']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.849" endtime="20250614 21:20:54.849"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${SINOPSIS}</arg>
+<arg>${json_data['sinopsis']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.850" endtime="20250614 21:20:54.850"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${KEYWORD}</arg>
+<arg>${json_data['keyword']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.850" endtime="20250614 21:20:54.850"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${NOCLASS}</arg>
+<arg>${json_data['no_class']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" starttime="20250614 21:20:54.850" endtime="20250614 21:20:54.850"/>
+</kw>
+<status status="FAIL" starttime="20250614 21:20:54.607" endtime="20250614 21:20:54.851">HTTPError: 404 Client Error: NOT FOUND for url: http://103.106.72.182:8770/api/getBookSinopsis/16</status>
+</test>
+<test id="s1-t2" name="Access Library System Web Page" line="57">
+<kw name="Set Variable" library="BuiltIn">
+<var>${URL_BROWSER}</var>
+<arg>http://${IP_ADDRESS}/inlislite3/backend/site/login</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250614 21:20:54.852" level="INFO">${URL_BROWSER} = http://127.0.0.1/inlislite3/backend/site/login</msg>
+<status status="PASS" starttime="20250614 21:20:54.851" endtime="20250614 21:20:54.852"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${username_user}</var>
+<arg>${USERNAME_USER}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250614 21:20:54.852" level="INFO">${username_user} = inlislite</msg>
+<status status="PASS" starttime="20250614 21:20:54.852" endtime="20250614 21:20:54.852"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${password_user}</var>
+<arg>${PASSWORD_USER}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20250614 21:20:54.853" level="INFO">${password_user} = inlislite=</msg>
+<status status="PASS" starttime="20250614 21:20:54.853" endtime="20250614 21:20:54.853"/>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL_BROWSER}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20250614 21:20:54.854" level="INFO">Opening browser 'Chrome' to base url 'http://127.0.0.1/inlislite3/backend/site/login'.</msg>
+<status status="PASS" starttime="20250614 21:20:54.853" endtime="20250614 21:21:02.774"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20250614 21:21:02.775" endtime="20250614 21:21:02.807"/>
+</kw>
+<status status="PASS" starttime="20250614 21:20:54.851" endtime="20250614 21:21:02.807"/>
+</test>
+<test id="s1-t3" name="Login with Account Librarian" line="92">
+<kw name="Login website">
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id:loginform-username</arg>
+<arg>${username_user}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250614 21:21:02.810" level="INFO">Typing text 'inlislite' into text field 'id:loginform-username'.</msg>
+<status status="PASS" starttime="20250614 21:21:02.809" endtime="20250614 21:21:03.016"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id:loginform-password</arg>
+<arg>${password_user}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20250614 21:21:03.017" level="INFO">Typing text 'inlislite=' into text field 'id:loginform-password'.</msg>
+<status status="PASS" starttime="20250614 21:21:03.017" endtime="20250614 21:21:03.162"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>name:login-button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20250614 21:21:03.163" level="INFO">Clicking button 'name:login-button'.</msg>
+<status status="PASS" starttime="20250614 21:21:03.162" endtime="20250614 21:21:03.293"/>
+</kw>
+<status status="PASS" starttime="20250614 21:21:02.808" endtime="20250614 21:21:03.293"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250614 21:21:05.294" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250614 21:21:03.293" endtime="20250614 21:21:05.296"/>
+</kw>
+<kw name="Click Submit Button">
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>document.querySelector('button[type="submit"]').click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20250614 21:21:05.299" level="INFO">Executing JavaScript:
+document.querySelector('button[type="submit"]').click();
+Without any arguments.</msg>
+<status status="PASS" starttime="20250614 21:21:05.298" endtime="20250614 21:21:05.308"/>
+</kw>
+<status status="PASS" starttime="20250614 21:21:05.297" endtime="20250614 21:21:05.308"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20250614 21:21:07.314" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20250614 21:21:05.309" endtime="20250614 21:21:07.314"/>
+</kw>
+<status status="PASS" starttime="20250614 21:21:02.808" endtime="20250614 21:21:07.315"/>
+</test>
+<test id="s1-t4" name="Opening Entry Form" line="100">
+<kw name="Navigate to Entri Katalog (RDA)">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>xpath=//li[@class="treeview"]/a[contains(@href, '/inlislite3/backend/pengkatalogan/katalog/index')]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<msg timestamp="20250614 21:21:07.473" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179c8c]
+	(No symbol) [0x0x7ff6011c05ef]
+	(No symbol) [0x0x7ff6011f8832]
+	(No symbol) [0x0x7ff6011f3233]
+	(No symbol) [0x0x7ff6011f22f9]
+	(No symbol) [0x0x7ff601145fc5]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	(No symbol) [0x0x7ff601145036]
+	GetHandleVerifier [0x0x7ff6017a3c48+4158232]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</msg>
+<msg timestamp="20250614 21:21:07.475" level="FAIL">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=137.0.7151.104)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179e5a]
+	(No symbol) [0x0x7ff601165c25]
+	(No symbol) [0x0x7ff60118ac44]
+	(No symbol) [0x0x7ff6012003c5]
+	(No symbol) [0x0x7ff601220922]
+	(No symbol) [0x0x7ff6011f8743]
+	(No symbol) [0x0x7ff6011c14c1]
+	(No symbol) [0x0x7ff6011c2253]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	GetHandleVerifier [0x0x7ff6013c8dc4+115860]
+	GetHandleVerifier [0x0x7ff6013c8f79+116297]
+	GetHandleVerifier [0x0x7ff6013af528+11256]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</msg>
+<status status="FAIL" starttime="20250614 21:21:07.317" endtime="20250614 21:21:07.606"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>document.querySelector("a[href*='/inlislite3/backend/pengkatalogan/katalog/index']").click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.606" endtime="20250614 21:21:07.607"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>xpath=//li/a[@href='/inlislite3/backend/pengkatalogan/katalog/create?for=cat&amp;rda=1']</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.607" endtime="20250614 21:21:07.607"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>document.querySelector("a[href='/inlislite3/backend/pengkatalogan/katalog/create?for=cat&amp;rda=1']").click()</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.607" endtime="20250614 21:21:07.607"/>
+</kw>
+<status status="FAIL" starttime="20250614 21:21:07.316" endtime="20250614 21:21:07.607"/>
+</kw>
+<kw name="Input Book Data">
+<arg>${JUDUL}</arg>
+<arg>${PENGARANG}</arg>
+<arg>${PENERBITAN}</arg>
+<arg>${DESC}</arg>
+<arg>${ISBN}</arg>
+<arg>${KOTA}</arg>
+<arg>${EDITOR}</arg>
+<arg>${SINOPSIS}</arg>
+<arg>${KEYWORD}</arg>
+<arg>${ILUSTRATOR}</arg>
+<arg>${NOCLASS}</arg>
+<arg>${KODE_WILAYAH}</arg>
+<status status="NOT RUN" starttime="20250614 21:21:07.608" endtime="20250614 21:21:07.608"/>
+</kw>
+<status status="FAIL" starttime="20250614 21:21:07.315" endtime="20250614 21:21:07.608">InvalidSessionIdException: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=137.0.7151.104)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179e5a]
+	(No symbol) [0x0x7ff601165c25]
+	(No symbol) [0x0x7ff60118ac44]
+	(No symbol) [0x0x7ff6012003c5]
+	(No symbol) [0x0x7ff601220922]
+	(No symbol) [0x0x7ff6011f8743]
+	(No symbol) [0x0x7ff6011c14c1]
+	(No symbol) [0x0x7ff6011c2253]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	GetHandleVerifier [0x0x7ff6013c8dc4+115860]
+	GetHandleVerifier [0x0x7ff6013c8f79+116297]
+	GetHandleVerifier [0x0x7ff6013af528+11256]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</status>
+</test>
+<test id="s1-t5" name="Close Access Library System Web Page" line="116">
+<kw name="Logout Website">
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>css=div.modal-backdrop</arg>
+<arg>timeout=30s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<msg timestamp="20250614 21:21:07.618" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179c8c]
+	(No symbol) [0x0x7ff6011c05ef]
+	(No symbol) [0x0x7ff6011f8832]
+	(No symbol) [0x0x7ff6011f3233]
+	(No symbol) [0x0x7ff6011f22f9]
+	(No symbol) [0x0x7ff601145fc5]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	(No symbol) [0x0x7ff601145036]
+	GetHandleVerifier [0x0x7ff6017a3c48+4158232]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</msg>
+<msg timestamp="20250614 21:21:07.619" level="FAIL">InvalidSessionIdException: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179c8c]
+	(No symbol) [0x0x7ff6011c05ef]
+	(No symbol) [0x0x7ff6011f8832]
+	(No symbol) [0x0x7ff6011f3233]
+	(No symbol) [0x0x7ff6011f22f9]
+	(No symbol) [0x0x7ff601145fc5]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	(No symbol) [0x0x7ff601145036]
+	GetHandleVerifier [0x0x7ff6017a3c48+4158232]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</msg>
+<status status="FAIL" starttime="20250614 21:21:07.611" endtime="20250614 21:21:07.620"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>swal.close();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.620" endtime="20250614 21:21:07.620"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>xpath=//li[@class="dropdown user user-menu"]/a[contains(@class, 'dropdown-toggle')]</arg>
+<arg>timeout=30s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.621" endtime="20250614 21:21:07.621"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=//li[@class="dropdown user user-menu"]/a[contains(@class, 'dropdown-toggle')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.621" endtime="20250614 21:21:07.621"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${logout_element}</var>
+<arg>return document.querySelector("a[href='/inlislite3/backend/site/logout']");</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.621" endtime="20250614 21:21:07.621"/>
+</kw>
+<if>
+<branch type="IF" condition="'${logout_element}' == None">
+<kw name="Fail" library="BuiltIn">
+<arg>Logout link not found in the DOM</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.622" endtime="20250614 21:21:07.622"/>
+</kw>
+<status status="NOT RUN" starttime="20250614 21:21:07.621" endtime="20250614 21:21:07.622"/>
+</branch>
+<status status="NOT RUN" starttime="20250614 21:21:07.621" endtime="20250614 21:21:07.622"/>
+</if>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>document.querySelector("a[href='/inlislite3/backend/site/logout']").click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.622" endtime="20250614 21:21:07.622"/>
+</kw>
+<status status="FAIL" starttime="20250614 21:21:07.610" endtime="20250614 21:21:07.623"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" starttime="20250614 21:21:07.623" endtime="20250614 21:21:07.623"/>
+</kw>
+<status status="FAIL" starttime="20250614 21:21:07.610" endtime="20250614 21:21:07.623">InvalidSessionIdException: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179c8c]
+	(No symbol) [0x0x7ff6011c05ef]
+	(No symbol) [0x0x7ff6011f8832]
+	(No symbol) [0x0x7ff6011f3233]
+	(No symbol) [0x0x7ff6011f22f9]
+	(No symbol) [0x0x7ff601145fc5]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	(No symbol) [0x0x7ff601145036]
+	GetHandleVerifier [0x0x7ff6017a3c48+4158232]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</status>
+</test>
+<status status="FAIL" starttime="20250614 21:20:52.889" endtime="20250614 21:21:07.624"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="3" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="3" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20250614 21:21:07.473" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179c8c]
+	(No symbol) [0x0x7ff6011c05ef]
+	(No symbol) [0x0x7ff6011f8832]
+	(No symbol) [0x0x7ff6011f3233]
+	(No symbol) [0x0x7ff6011f22f9]
+	(No symbol) [0x0x7ff601145fc5]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	(No symbol) [0x0x7ff601145036]
+	GetHandleVerifier [0x0x7ff6017a3c48+4158232]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</msg>
+<msg timestamp="20250614 21:21:07.618" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6013bfe75+79173]
+	GetHandleVerifier [0x0x7ff6013bfed0+79264]
+	(No symbol) [0x0x7ff601179c8c]
+	(No symbol) [0x0x7ff6011c05ef]
+	(No symbol) [0x0x7ff6011f8832]
+	(No symbol) [0x0x7ff6011f3233]
+	(No symbol) [0x0x7ff6011f22f9]
+	(No symbol) [0x0x7ff601145fc5]
+	GetHandleVerifier [0x0x7ff60168a2ad+3004797]
+	GetHandleVerifier [0x0x7ff6016846fd+2981325]
+	GetHandleVerifier [0x0x7ff6016a3350+3107360]
+	GetHandleVerifier [0x0x7ff6013da9fe+188622]
+	GetHandleVerifier [0x0x7ff6013e228f+219487]
+	(No symbol) [0x0x7ff601145036]
+	GetHandleVerifier [0x0x7ff6017a3c48+4158232]
+	BaseThreadInitThunk [0x0x7ff89934e8d7+23]
+	RtlUserThreadStart [0x0x7ff899a5c34c+44]
+</msg>
+</errors>
+</robot>
